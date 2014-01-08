@@ -43,8 +43,42 @@
                     }
                 });
             });
-        }
+        },
 
+        valueset: function (options) {
+
+            var defaults = {
+                cts2Service: "http://10.148.2.82:8888",
+                uriDataAttr: 'uri',
+                href: null
+            };
+
+            options = $.extend(defaults, options);
+
+            return this.each(function(idx) {
+                var $item = $(this);
+                var uri = $item.data(options.uriDataAttr);
+
+                var href = options.href ? options.href : options.cts2Service + "/valuesetdefinitionbyuri/resolution?format=json&uri=" + uri;
+
+                $.ajax({
+                    url: href,
+                    dataType: 'jsonp',
+                    success: function(response){
+                        for(var i in response.IteratableResolvedValueSet.entry) {
+                            var entry = response.IteratableResolvedValueSet.entry[i];
+                            var key = entry.name;
+                            var value = entry.name;
+                            var designation = entry.designation;
+
+                            $item.append($("<option></option>")
+                                .attr("value",key)
+                                .text(value + " - " + designation));
+                        }
+                    }
+                });
+            });
+        }
 
     });
 }(jQuery));

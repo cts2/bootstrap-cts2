@@ -15,8 +15,13 @@
 		<h1>CTS2 Entity Annotation Example</h1>
         Pending tests: <b><span class="cts2-annotated" data-uri="http://id.loinc.org/id/14744-7">Glucose (hover)</span></b>
 
+        <h1>CTS2 Value Set Example</h1>
+        <select class="cts2-valueset" data-uri="http://hl7.org/ontology/vocab/uv/vs/ActDietCode/2012-11-21"></select>
+
         <script type="text/javascript">
             $('.cts2-annotated').annotate();
+
+            $('.cts2-valueset').valueset();
         </script>
     </div>
 </body>
